@@ -14,7 +14,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 
 public class MainFrame extends JFrame {
 
@@ -102,24 +104,44 @@ public class MainFrame extends JFrame {
         mainPanel.setPreferredSize(new Dimension(430, 425));
         mainPanel.setBorder(BorderFactory.createEmptyBorder());
 
-        commentPanel.setBackground(Color.WHITE);
-        commentPanel.setPreferredSize(new Dimension(435, 195));
-        commentPanel.setBorder(BorderFactory.createEmptyBorder());
-        dependencyPanel.setBackground(Color.WHITE);
-        dependencyPanel.setPreferredSize(new Dimension(435, 275));
+        JLabel dependencyLabel = new JLabel("Dependency Tree:");
+        dependencyLabel.setPreferredSize(new Dimension(420, 15));
+
+        JScrollPane dependencyPane = new JScrollPane();
+        dependencyPane.setPreferredSize(new Dimension(420, 200));
+
+        dependencyPanel.setBackground(Color.LIGHT_GRAY);
+        dependencyPanel.setPreferredSize(new Dimension(420, 230));
         dependencyPanel.setBorder(BorderFactory.createEmptyBorder());
 
-        JLabel unstagedLabel = new JLabel("unstaged:");
-        unstagedLabel.setPreferredSize(new Dimension(185, 15));
+        dependencyPanel.add(dependencyLabel);
+        dependencyPanel.add(dependencyPane);
 
-        String unstagedList[] = {"e.plist", "a_long_file_name.docx", "g.docx", "h.docx"};
+        commentPanel.setBackground(Color.LIGHT_GRAY);
+        commentPanel.setPreferredSize(new Dimension(420, 180));
+        commentPanel.setBorder(BorderFactory.createEmptyBorder());
+
+        JLabel commentLabel = new JLabel("Comment:");
+        commentLabel.setPreferredSize(new Dimension(420, 15));
+
+        JTextArea commentText = new JTextArea();
+        commentText.setPreferredSize(new Dimension(420, 155));
+        commentText.setLineWrap(true);
+
+        commentPanel.add(commentLabel);
+        commentPanel.add(commentText);
+
+        String unstagedList[] = {"+ e.plist", "- a_long_file_name.doc", "* g.docx", "+ h.docx"};
         JList unstagedBox = new JList(unstagedList);
         unstagedBox.setPreferredSize(new Dimension(185, 185));
 
-        JLabel stagedLabel = new JLabel("staged:");
+        JLabel unstagedLabel = new JLabel("Unstaged:");
+        unstagedLabel.setPreferredSize(new Dimension(185, 15));
+
+        JLabel stagedLabel = new JLabel("Staged:");
         stagedLabel.setPreferredSize(new Dimension(185, 15));
 
-        String stagedList[] = {"a.docx", "b.docx", "c.docx", "d.txt"};
+        String stagedList[] = {"- a.docx", "* b.docx", "* c.docx", "* d.txt"};
         JList stagedBox = new JList(stagedList);
         stagedBox.setPreferredSize(new Dimension(185, 185));
 
